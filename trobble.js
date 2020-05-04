@@ -1,4 +1,6 @@
 class Trobble{
+    exhausted = false;
+
     constructor(name, sex){
         this.name = name;
         this.sex = sex;
@@ -16,15 +18,18 @@ class Trobble{
             this.age += 1;
             this.hunger += this.age;
             this.health = Math.max(Math.ceil(this.health) -(this.hunger / 20) , 0);
+            this.exhausted = false;
         }
     }
 
     feed(){
         this.hunger = Math.max(this.hunger - 25 , 0);
+        this.exhausted = true;
     }
 
     cure(){
         this.health = Math.min(this.health + 5 , 10);
+        this.exhausted = true;
     }
 
     is_alive(){
@@ -36,11 +41,7 @@ class Trobble{
         if (this.health > 3) health = 'has seen better days'
         if (this.health > 5) health = 'faring well'
         if (this.health > 8) health = 'in his prime'
-        return `<div class='desc'>
-                    <img src='' alt='imag'>
-                    <p>${this.name}</p>
-                    <p>${this.age} old, ${health}</p>
-                </div>`
+        return `<img src='' alt='imag'><p>${this.name}</p><p>${this.age} years old,</p><p>${health}</p>`
     }
 }
 

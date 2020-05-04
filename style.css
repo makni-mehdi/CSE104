@@ -37,13 +37,31 @@
 
 
 .list_of_trobbles {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-around;
+
     max-height: 50vh;
     min-height: 30vh;
     height: auto;
     width: 100%;
     margin: 0px;
+
     background-color: burlywood;
 }
+
+.desc {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-align: center;
+
+    background-color: crimson;
+    height: auto;
+    width: 100px;
+    padding: 10px;
+}
+
 
 .interactions {
     display: flex;

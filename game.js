@@ -8,20 +8,20 @@ class Game{
         this.running = true
     }
 
-    play(){
+    init(){
         //create initial trobble
         this.new_trobble()
+    }
 
+    play(){
         //gameloop
-        while (this.running){
+        if (this.running){
             lot = document.querySelector(".list_of_trobbles")
             // remove all the old trobble cards
             while (lot.firstChild)
                 lot.removeChild(lot.firstChild)
 
-
-            let i = 0;
-            for (i = 0; i < this.trobbles.length; i++){
+            for (let i = 0; i < this.trobbles.length; i++){
                 const trobble = this.trobbles[i]
                 if (trobble.health == 0){
                     $('.messages').append(`<p>Unfortunately, your Trobble, ${trobble.name}, has died at the age of ${trobble.age}</p>`)
@@ -34,12 +34,15 @@ class Game{
 
                 const tmp = document.createElement("div")
                 tmp.innerHTML = trobble.display()
+                tmp.classList.add('desc')
+                tmp.addEventListener('click', ()=>{
+                    if (trobble.exhausted)
+                        return
+                    let action = get_action(this.actions)
+                    action(trobble)
+                })
 
                 lot.appendChild(tmp)
-
-                let action = get_action(this.actions)
-                action(trobble)
-                trobble.next_turn()
             }
 
             if (this.trobbles.length === 0)
@@ -53,6 +56,16 @@ class Game{
         let trobble = new Trobble(name, sex)
 
         this.trobbles.push(trobble)
+    }
+
+    next_day(){
+        if (!this.running)
+            return
+        for (let i = 0; i < this.trobbles.length; i++) {
+            this.trobbles[i].next_turn()
+        }
+        $('.messages').append('<p>A day has passed</p>')
+        console.log('f')
     }
 }
 
@@ -114,3 +127,5 @@ function feed(trobble){ //could be implemented using lambdas later
 function cure(trobble){ //could be implemented using lambdas later
     trobble.cure()
 }
+
+// interactions with user
