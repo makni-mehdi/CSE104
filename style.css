@@ -8,19 +8,38 @@
     height: 100px;
 }
 
+
+#container{
+    display: flex;
+    flex-direction: column;
+}
+
 .navbar {
+    display: flex;
+    align-items: baseline;
+    align-content: space-between;
+
     position: relative;
     width: 100%;
     max-height: 10vh;
     min-height: 5vh;
     height: auto;
-    margin: 0px;
     background-color: aqua;
+}
+
+.navbar a{
+    margin: auto;
+}
+.navbar img{
+    height: 5vh
+    width: auto;
 }
 
 
 canvas {
-    height: 70vh;
+    max-height: 50vh;
+    min-height: 30vh;
+    height: auto;
     width: 100%;
     margin: 0px;
     background-color: burlywood;
@@ -31,8 +50,8 @@ canvas {
     flex-direction: column;
 
     width: 100% - 10px;
-    max-height: 20vh;
-    min-height: 15vh;
+    max-height: 40vh;
+    min-height: 20vh;
     height: auto;
     background-color: blueviolet;
     margin: 0px;
@@ -46,4 +65,9 @@ canvas {
     background-color: azure;
     height: 100%;
     overflow: scroll;
+}
+
+.messages p{
+    margin-top: 0;
+    margin-bottom: 0;
 }

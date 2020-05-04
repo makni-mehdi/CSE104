@@ -1,3 +1,29 @@
+class Game{
+    constructor(){
+        this.trobbles = []
+        this.date = 0
+        this.grave = []
+    }
+
+    play(){
+        let name = get_name()
+        let sex = get_sex()
+        let trobble = new Trobble(name, sex)
+        let actions = {'feed': feed, 'cure': cure}
+        while (trobble.is_alive()){
+            //document.write('You have one Trobble named ' + trobble.str())
+            $('.messages').append('<p>You have one Trobble named ' + trobble.str()+'</p>')
+            let action = get_action(actions)
+            action(trobble)
+            trobble.next_turn()
+        }
+        //document.write(`Unfortunately, your Trobble ${trobble.name} has died at the age of {trobble.age}`)
+        $('.messages').append(`<p>Unfortunately, your Trobble, ${trobble.name}, has died at the age of ${trobble.age}</p>`)
+    }
+}
+
+
+// input functions
 function get_name(){
     return window.prompt('Please give your new Trobble a name: ');
 }
@@ -7,10 +33,10 @@ function get_sex(){
     while (sex == ''){
         const quest = 'Is your new Trobble male or female? Type "m" or "f" to choose: ';
         let choice = window.prompt(quest);
-        if (choice == 'm'){
+        if (choice == 'm' || choice == 'male'){
             sex = 'male';
         }
-        else if (choice == 'f'){
+        else if (choice == 'f' || choice == "female"){
             sex = 'female';
         }
     }
@@ -38,23 +64,8 @@ function get_action(actions,pets,n){
         }
     }
 }
-        
-function play(){
-    let name = get_name()
-    let sex = get_sex()
-    let trobble = new Trobble(name, sex)
-    let actions = {'feed': feed, 'cure': cure}
-    while (trobble.is_alive()){
-        //document.write('You have one Trobble named ' + trobble.str())
-        $('.messages').append('<p>You have one Trobble named ' + trobble.str()+'</p>')
-        let action = get_action(actions)
-        action(trobble)
-        trobble.next_turn()
-    }
-    //document.write(`Unfortunately, your Trobble ${trobble.name} has died at the age of {trobble.age}`)
-    $('.messages').append(`<p>Unfortunately, your Trobble ${trobble.name} has died at the age of {trobble.age}</p>`)
-}
-
+    
+// trobble interactions
 function mate(trobble1, trobble2, name_offspring){
     if ((trobble1.age > 3) && (trobble2.age > 3) && ([trobble1.sex,trobble2.sex] in [['male','female'],['female','male']])){
         return Trobble(name_offspring,trobble1.sex)
