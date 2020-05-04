@@ -20,7 +20,6 @@ class Trobble{
     }
 
     feed(){
-        console.log(this.hunger)
         this.hunger = Math.max(this.hunger - 25 , 0);
     }
 

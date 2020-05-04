@@ -4,6 +4,9 @@
 
 <head>
     <title> CSE104 </title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous" defer></script>
     <script src="trobble.js" defer></script>
     <script src="game.js" defer></script>
 	<!-- <script src="main.js" defer></script> -->
@@ -16,9 +19,21 @@
 </head>
 
 <body>
+    <!-- to let us setup popups later... maybe need to create a js macro/function for that -->
+    <div id="popups"></div>
+
+    <!-- the head navbar... maybe to show how many trobbles are alive and other stats... maybe the menus if we come to that too... -->
     <div class="navbar"></div>
-	<canvas></canvas>
-    <div class="interactions"></div>
+
+    <!-- used to display the trobbles... need to find what "look" we want -->
+    <!-- might replace canvas with a regular div depending on what we do -->
+    <canvas></canvas>
+    
+    <!-- a place to print all the informations and flavor text... -->
+    <div class="interactions">
+        <p>Latest messages:</p>
+        <div class="messages"></div>
+    </div>
 </body>
 
 

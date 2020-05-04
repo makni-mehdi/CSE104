@@ -45,12 +45,14 @@ function play(){
     let trobble = new Trobble(name, sex)
     let actions = {'feed': feed, 'cure': cure}
     while (trobble.is_alive()){
-        document.write('You have one Trobble named ' + trobble.str())
+        //document.write('You have one Trobble named ' + trobble.str())
+        $('.messages').append('<p>You have one Trobble named ' + trobble.str()+'</p>')
         let action = get_action(actions)
         action(trobble)
         trobble.next_turn()
     }
-    document.write(`Unfortunately, your Trobble ${trobble.name} has died at the age of {trobble.age}`)
+    //document.write(`Unfortunately, your Trobble ${trobble.name} has died at the age of {trobble.age}`)
+    $('.messages').append(`<p>Unfortunately, your Trobble ${trobble.name} has died at the age of {trobble.age}</p>`)
 }
 
 function mate(trobble1, trobble2, name_offspring){
@@ -59,10 +61,10 @@ function mate(trobble1, trobble2, name_offspring){
     }
 }
 
-function feed(trobble){
+function feed(trobble){ //could be implemented using lambdas later
     trobble.feed()
 }
 
-function cure(trobble){
+function cure(trobble){ //could be implemented using lambdas later
     trobble.cure()
 }
