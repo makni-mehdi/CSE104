@@ -15,7 +15,7 @@ class Trobble{
         if (this.health != 0){
             this.age += 1;
             this.hunger += this.age;
-            this.health = Math.max(this.health -(this.hunger / 20) , 0);
+            this.health = Math.max(Math.ceil(this.health) -(this.hunger / 20) , 0);
         }
     }
 
@@ -29,6 +29,18 @@ class Trobble{
 
     is_alive(){
        return this.health > 0;
+    }
+
+    display(){
+        let health = "taking his last breath";
+        if (this.health > 3) health = 'has seen better days'
+        if (this.health > 5) health = 'faring well'
+        if (this.health > 8) health = 'in his prime'
+        return `<div class='desc'>
+                    <img src='' alt='imag'>
+                    <p>${this.name}</p>
+                    <p>${this.age} old, ${health}</p>
+                </div>`
     }
 }
 

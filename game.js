@@ -1,24 +1,58 @@
 class Game{
+    actions = {'feed': feed, 'cure': cure}
+
     constructor(){
         this.trobbles = []
         this.date = 0
         this.grave = []
+        this.running = true
     }
 
     play(){
+        //create initial trobble
+        this.new_trobble()
+
+        //gameloop
+        while (this.running){
+            lot = document.querySelector(".list_of_trobbles")
+            // remove all the old trobble cards
+            while (lot.firstChild)
+                lot.removeChild(lot.firstChild)
+
+
+            let i = 0;
+            for (i = 0; i < this.trobbles.length; i++){
+                const trobble = this.trobbles[i]
+                if (trobble.health == 0){
+                    $('.messages').append(`<p>Unfortunately, your Trobble, ${trobble.name}, has died at the age of ${trobble.age}</p>`)
+                    this.trobbles.splice(this.trobbles.indexOf(trobble),1)
+                    this.grave.push(trobble)
+                    continue
+                }
+                //$('.messages').append('<p>You have one Trobble named ' + trobble.str()+'</p>')
+                // $('.messages').append(trobble.display())
+
+                const tmp = document.createElement("div")
+                tmp.innerHTML = trobble.display()
+
+                lot.appendChild(tmp)
+
+                let action = get_action(this.actions)
+                action(trobble)
+                trobble.next_turn()
+            }
+
+            if (this.trobbles.length === 0)
+                this.running = false
+        }
+    }
+
+    new_trobble(){
         let name = get_name()
         let sex = get_sex()
         let trobble = new Trobble(name, sex)
-        let actions = {'feed': feed, 'cure': cure}
-        while (trobble.is_alive()){
-            //document.write('You have one Trobble named ' + trobble.str())
-            $('.messages').append('<p>You have one Trobble named ' + trobble.str()+'</p>')
-            let action = get_action(actions)
-            action(trobble)
-            trobble.next_turn()
-        }
-        //document.write(`Unfortunately, your Trobble ${trobble.name} has died at the age of {trobble.age}`)
-        $('.messages').append(`<p>Unfortunately, your Trobble, ${trobble.name}, has died at the age of ${trobble.age}</p>`)
+
+        this.trobbles.push(trobble)
     }
 }
 
@@ -48,7 +82,8 @@ function get_action(actions,pets,n){
         const quest = `Type one of ${Object.keys(actions).join(', ')} to perform the action:`;
         let action_string = window.prompt(quest);
         if (!(action_string in actions)){
-            document.write('Unknown action!');
+            console.log('Unknown action!');
+            alert('Unknown action!')
         }
         else if (action_string == 'mate'){
             let test = false;

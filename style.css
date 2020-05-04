@@ -31,12 +31,12 @@
     margin: auto;
 }
 .navbar img{
-    height: 5vh
+    height: 5vh;
     width: auto;
 }
 
 
-canvas {
+.list_of_trobbles {
     max-height: 50vh;
     min-height: 30vh;
     height: auto;
@@ -64,7 +64,7 @@ canvas {
     flex-grow: 100;
     background-color: azure;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .messages p{
