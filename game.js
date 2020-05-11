@@ -35,9 +35,11 @@ class Game{
                 const tmp = document.createElement("div")
                 tmp.innerHTML = trobble.display()
                 tmp.classList.add('desc')
-                tmp.addEventListener('click', ()=>{
-                    if (trobble.exhausted)
+                tmp.addEventListener('mousedown', (e)=>{
+                    if (trobble.exhausted) {
+                        $('.messages').append('<p>' + trobble.name + " is exhausted...</p>")
                         return
+                    }
                     let action = get_action(this.actions)
                     action(trobble)
                 })
