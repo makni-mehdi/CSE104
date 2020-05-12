@@ -1,5 +1,6 @@
 class Trobble{
     exhausted = false;
+    baby = false;
 
     constructor(name, sex){
         this.name = name;
@@ -19,6 +20,9 @@ class Trobble{
             this.hunger += this.age;
             this.health = Math.max(Math.ceil(this.health) -(this.hunger / 20) , 0);
             this.exhausted = false;
+        }
+        if (this.baby) {
+            this.baby = false
         }
     }
 

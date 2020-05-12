@@ -1,5 +1,10 @@
 class Game{
-    actions = {'feed': feed, 'cure': cure, 'cancel': ()=>{}}
+    actions = {
+        'feed': feed,
+        'cure': cure,
+        'mate': mate,
+        'cancel': ()=>{}
+    }
 
     constructor(){
         this.trobbles = []
@@ -27,8 +32,13 @@ class Game{
                 const trobble = this.trobbles[i]
                 if (trobble.health == 0){
                     $('.messages').append(`<p>Unfortunately, your Trobble, ${trobble.name}, has died at the age of ${trobble.age}</p>`)
-                    //this.trobbles.splice(this.trobbles.indexOf(trobble),1)
                     this.grave.push(trobble)
+                    continue
+                }
+
+                if (trobble.baby) {
+                    trobble.age = -1
+                    live_trobbles.push(trobble)
                     continue
                 }
 
@@ -40,7 +50,7 @@ class Game{
                         $('.messages').append('<p>' + trobble.name + " is exhausted...</p>")
                         return
                     }
-                    trobble_do(trobble, this.actions)
+                    trobble_do(trobble, this)
                 })
                 live_trobbles.push(trobble)
 

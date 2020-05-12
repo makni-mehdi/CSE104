@@ -42,19 +42,19 @@ function generate(game, name, popup){
     popup.show()
 }
 
-function trobble_do(trobble, actions){
+function trobble_do(trobble, game){
     let div = document.createElement('div')
     let tmp = document.createElement('h5')
     tmp.textContent = "What do you wanna do?"
     div.appendChild(tmp)
-    for (const action in actions){
+    for (const action in game.actions){
         tmp = document.createElement('p')
         tmp.classList.add('btn')
         tmp.textContent = action
         tmp.addEventListener("mousedown", ()=>{
             popup.clear_content()
             popup.hide()
-            actions[action](trobble)
+            game.actions[action](trobble, game)
         })
         div.appendChild(tmp)
     }
@@ -67,42 +67,62 @@ function get_name(){
     return window.prompt('Please give your new Trobble a name: ');
 }
 
-function get_action(actions,pets,n){
-    while (true){
-        const quest = `Type one of ${Object.keys(actions).join(', ')} to perform the action:`;
-        let action_string = window.prompt(quest);
-        if (!(action_string in actions)){
-            console.log('Unknown action!');
-            alert('Unknown action!')
-        }
-        else if (action_string == 'mate'){
-            let test = false;
-            while (! (test)){
-                let j = int(window.prompt('Please give the other trobble you want to mate with{'));
-                test = (j<Object.keys(pets).length) && (j >= 0) && (j != n);
-            }
-            let name = get_name()
-            return mate(pets[n],pets[j],name)
-        }
-        else{
-            return actions[action_string]
-        }
-    }
-}
-
 // trobble interactions
-function mate(trobble1, trobble2, name_offspring){
-    if ((trobble1.age > 3) && (trobble2.age > 3) && ([trobble1.sex,trobble2.sex] in [['male','female'],['female','male']])){
-        return Trobble(name_offspring,trobble1.sex)
+function mate(trobble, game){
+    if (trobble.age <= 3) {
+        $('.messages').append(`<p>${trobble.name} is too young to mate!</p>`)
+        return
     }
+
+    // prompt for second parent
+    let div = document.createElement('div')
+    let tmp = document.createElement('h5')
+    tmp.textContent = `Whom should ${trobble.name} mate with?`
+    div.appendChild(tmp)
+    for (const p in game.trobbles){
+        const partner = game.trobbles[p]
+        if ((partner.sex === trobble.sex) || (partner.age <= 3))
+            continue
+        
+        tmp = document.createElement('p')
+        tmp.classList.add('btn')
+        tmp.textContent = partner.name
+        tmp.addEventListener("mousedown", ()=>{
+            popup.clear_content()
+            popup.hide()
+            trobble.exhausted = true
+            partner.exhausted = true
+
+            let name = window.prompt("How shall the baby be called?")
+            let baby = new Trobble(name, trobble.sex)
+            baby.baby = true
+            game.append_trobble(baby)
+
+            $('.messages').append(`<p>${trobble.name} and ${partner.name} mated.</p>`)
+        })
+        div.appendChild(tmp)
+    }
+
+    // cancel button
+    tmp = document.createElement('p')
+    tmp.classList.add('btn')
+    tmp.textContent = "cancel"
+    tmp.addEventListener("mousedown", ()=>{
+        popup.clear_content()
+        popup.hide()
+    })
+    div.appendChild(tmp)
+
+    popup.append(div)
+    popup.show()
 }
 
-function feed(trobble){ //could be implemented using lambdas later
+function feed(trobble, game){ //could be implemented using lambdas later
     trobble.feed()
     $('.messages').append(`<p>You fed ${trobble.name}.</p>`)
 }
 
-function cure(trobble){ //could be implemented using lambdas later
+function cure(trobble, game){ //could be implemented using lambdas later
     trobble.cure()
     $('.messages').append(`<p>You cured ${trobble.name}.</p>`)
 }
