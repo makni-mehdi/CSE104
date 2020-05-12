@@ -1,5 +1,5 @@
 class Game{
-    actions = {'feed': feed, 'cure': cure}
+    actions = {'feed': feed, 'cure': cure, 'cancel': ()=>{}}
 
     constructor(){
         this.trobbles = []
@@ -40,8 +40,7 @@ class Game{
                         $('.messages').append('<p>' + trobble.name + " is exhausted...</p>")
                         return
                     }
-                    let action = get_action(this.actions)
-                    action(trobble)
+                    trobble_do(trobble, this.actions)
                 })
                 live_trobbles.push(trobble)
 

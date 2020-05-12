@@ -20,7 +20,6 @@ class Popup{
 }
 
 function generate(game, name, popup){
-    let sex;
     let div = document.createElement('div')
     let tmp = document.createElement('h5')
     tmp.textContent = "What is your trobble's sex"
@@ -41,29 +40,32 @@ function generate(game, name, popup){
     }
     popup.append(div)
     popup.show()
+}
 
-    return sex
+function trobble_do(trobble, actions){
+    let div = document.createElement('div')
+    let tmp = document.createElement('h5')
+    tmp.textContent = "What do you wanna do?"
+    div.appendChild(tmp)
+    for (const action in actions){
+        tmp = document.createElement('p')
+        tmp.classList.add('btn')
+        tmp.textContent = action
+        tmp.addEventListener("mousedown", ()=>{
+            popup.clear_content()
+            popup.hide()
+            actions[action](trobble)
+        })
+        div.appendChild(tmp)
+    }
+    popup.append(div)
+    popup.show()
 }
 
 // input functions
 function get_name(){
     return window.prompt('Please give your new Trobble a name: ');
 }
-
-// function get_sex(){
-//     let sex = ''
-//     while (sex == ''){
-//         const quest = 'Is your new Trobble male or female? Type "m" or "f" to choose: ';
-//         let choice = window.prompt(quest);
-//         if (choice == 'm' || choice == 'male'){
-//             sex = 'male';
-//         }
-//         else if (choice == 'f' || choice == "female"){
-//             sex = 'female';
-//         }
-//     }
-//     return sex
-// }
 
 function get_action(actions,pets,n){
     while (true){
@@ -97,9 +99,11 @@ function mate(trobble1, trobble2, name_offspring){
 
 function feed(trobble){ //could be implemented using lambdas later
     trobble.feed()
+    $('.messages').append(`<p>You fed ${trobble.name}.</p>`)
 }
 
 function cure(trobble){ //could be implemented using lambdas later
     trobble.cure()
+    $('.messages').append(`<p>You cured ${trobble.name}.</p>`)
 }
 
