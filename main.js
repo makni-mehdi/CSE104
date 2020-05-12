@@ -1,6 +1,7 @@
 let observer = new MutationObserver(scrollToBottom);
 let lot = document.querySelector('.list_of_trobbles')
 let msg = document.querySelector('.messages')
+let popup = new Popup(document.querySelector('#popups'))
 
 observer.observe(msg, { childList: true });
 
@@ -16,8 +17,7 @@ window.onload = ()=>{
     let agebtn = document.getElementById("#age")
     agebtn.addEventListener('click', ()=>{g.next_day()})
 
-
-    g.init()
+    g.new_trobble()
 
     play()
 }

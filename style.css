@@ -4,8 +4,14 @@
     background-color: indigo;
     color: chartreuse;
 
-    width: auto;
-    height: 100px;
+    text-align: center;
+    border: solid black 3px;
+
+    top: 10vh;
+    right: 25vw;
+
+    width: 50vw;
+    height: auto;
 }
 
 
@@ -60,6 +66,8 @@
     height: auto;
     width: 100px;
     padding: 10px;
+    margin-right: 1vw;
+    margin-left: 1vw;
 }
 
 
