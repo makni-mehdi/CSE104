@@ -1,13 +1,18 @@
+body {
+    margin: 0;
+}
+
 #popups {
     visibility: visible;
     position: absolute;
-    background-color: indigo;
-    color: chartreuse;
+    background-color: rgba(0, 0, 0, 0.431);
+    color: black;
+    font-size: 1.2em;
 
     text-align: center;
     border: solid black 3px;
 
-    top: 10vh;
+    top: 20vh;
     right: 25vw;
 
     width: 50vw;
@@ -30,30 +35,63 @@
     max-height: 10vh;
     min-height: 5vh;
     height: auto;
-    background-color: aqua;
+    background-color: rgb(0, 60, 75);
+    color: rgb(0, 255, 255);
 }
 
-.navbar a{
-    margin: auto;
+.navbar h2{
+    font-size: 1.6em;
+    margin-left: 10%;
+    width: 20%;
+}
+
+.insideNav {
+    margin-left: 30%;
+    width: 40%;
+}
+
+.insideNav a {
+    margin-left: 7%;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.3em;
+    color: rgb(0, 255, 255);
+}
+.insideNav a:hover {
+    margin-left: 7%;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.3em;
+    color: white;
 }
 .navbar img{
     height: 5vh;
     width: auto;
 }
 
+button {
+    margin: auto;
+    width: 25%;
+    background-color: rgba(0, 60, 75);
+    color: white;
+    font-size: 1.6em;
+    font-weight: 200;
+    border-radius: 20px;
+    display: block;
+}
 
 .list_of_trobbles {
     display: flex;
     flex-flow: row wrap;
     align-content: space-around;
 
-    max-height: 50vh;
-    min-height: 30vh;
+    max-height:70vh;
+    min-height: 50vh;
     height: auto;
     width: 100%;
     margin: 0px;
 
-    background-color: burlywood;
+    background-color: rgba(134, 86, 23, 0.2);
 }
 
 .desc {
@@ -76,14 +114,19 @@
     flex-direction: column;
 
     width: 100% - 10px;
-    max-height: 40vh;
+    max-height: 35vh;
     min-height: 20vh;
     height: auto;
-    background-color: blueviolet;
+    background-color: rgb(0, 60, 75);
     margin: 0px;
     padding: 0px;
 
     border: black double 5px;
+}
+#likelink {
+    color: rgb(0, 255, 255);
+    font-weight: bold;
+    font-size: 1.3em;
 }
 
 .messages {
@@ -96,4 +139,19 @@
 .messages p{
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.description {
+    padding: 5%;
+    font-size: 1.2em;
+    background-color: rgba(134, 86, 23, 0.2);
+    bottom: 0;
+}
+
+.description p{
+    margin-bottom: 30%;
+}
+
+.description h1{
+    color: rgb(0, 60, 75);
 }
