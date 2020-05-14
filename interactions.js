@@ -20,6 +20,8 @@ class Popup{
 }
 
 function generate(game, name, popup){
+    popup.clear_content()
+
     let div = document.createElement('div')
     let tmp = document.createElement('h5')
     tmp.textContent = "What is your trobble's sex"
@@ -43,9 +45,11 @@ function generate(game, name, popup){
 }
 
 function trobble_do(trobble, game){
+    popup.clear_content()
+
     let div = document.createElement('div')
     let tmp = document.createElement('h5')
-    tmp.textContent = "What do you wanna do?"
+    tmp.textContent = `What do you wanna do with ${trobble.name}?`
     div.appendChild(tmp)
     for (const action in game.actions){
         tmp = document.createElement('p')
@@ -69,6 +73,8 @@ function get_name(){
 
 // trobble interactions
 function mate(trobble, game){
+    popup.clear_content()
+
     if (trobble.age <= 3) {
         $('.messages').append(`<p>${trobble.name} is too young to mate!</p>`)
         return
@@ -81,7 +87,7 @@ function mate(trobble, game){
     div.appendChild(tmp)
     for (const p in game.trobbles){
         const partner = game.trobbles[p]
-        if ((partner.sex === trobble.sex) || (partner.age <= 3))
+        if ((partner.sex === trobble.sex) || (partner.age <= 3) || (partner.exhausted))
             continue
         
         tmp = document.createElement('p')

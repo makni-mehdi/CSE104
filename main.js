@@ -15,7 +15,11 @@ window.onload = ()=>{
     g = new Game();
 
     let agebtn = document.getElementById("#age")
-    agebtn.addEventListener('click', ()=>{g.next_day()})
+    agebtn.addEventListener('click', ()=>{
+        popup.clear_content()
+        popup.hide()
+        g.next_day()
+    })
 
     g.new_trobble()
 
