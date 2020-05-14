@@ -15,8 +15,7 @@ class Game{
 
     new_trobble(){
         //create initial trobble
-        let name = get_name()
-        generate(this, name, popup)
+        create_new_trobble(this, popup)
     }
 
     play(){

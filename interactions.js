@@ -44,6 +44,39 @@ function generate(game, name, popup){
     popup.show()
 }
 
+function create_new_trobble(game, popup){
+    popup.clear_content()
+
+    let div = document.createElement('div')
+    let tmp = document.createElement('h5')
+    tmp.textContent = "What is your trobble's name?"
+    div.appendChild(tmp)
+
+    tmp = document.createElement('input')
+    tmp.type = "text"
+    tmp.id = 'name'
+    tmp.required = true
+    div.appendChild(tmp)
+
+    let name = tmp
+    tmp = document.createElement('p')
+    tmp.id = 'submitbtn'
+    tmp.classList.add('btn')
+    tmp.textContent = 'submit'
+
+    div.appendChild(tmp)
+    popup.append(div)
+    popup.show()
+
+    tmp = document.getElementById("submitbtn")
+    tmp.addEventListener("mousedown", ()=>{
+        popup.clear_content()
+        popup.hide()
+
+        generate(game, name.value, popup)
+    })
+}
+
 function trobble_do(trobble, game){
     popup.clear_content()
 
@@ -64,11 +97,6 @@ function trobble_do(trobble, game){
     }
     popup.append(div)
     popup.show()
-}
-
-// input functions
-function get_name(){
-    return window.prompt('Please give your new Trobble a name: ');
 }
 
 // trobble interactions
