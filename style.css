@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    padding: 0;
 }
 
 #popups {
@@ -163,4 +164,13 @@ button {
 
 .description h1{
     color: rgb(0, 60, 75);
+}
+
+canvas{
+    border: 2px solid black;
+    margin: 1.6%;
+}
+
+.btn {
+    cursor: pointer;
 }
