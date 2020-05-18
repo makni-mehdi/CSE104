@@ -40,46 +40,41 @@ class Trobble{
        return this.health > 0;
     }
 
-    display(){
+    display(game){
         let health = "taking his last breath";
         if (this.health > 3) health = 'has seen better days'
         if (this.health > 5) health = 'faring well'
         if (this.health > 8) health = 'in his prime'
-        return `<img src='' alt='imag'><p>${this.name}</p><p>${this.age} years old,</p><p>${health}</p>`
+
+        let beegdiv = document.createElement('div')
+        beegdiv.position= 'relative'
+        beegdiv.classList.add('desc')
+        if (this.sex === "male")
+            beegdiv.classList.add('male')
+        if (this.sex === 'female')
+            beegdiv.classList.add('female')
+        lot.appendChild(beegdiv)
+
+        let tmp = document.createElement('img')
+        tmp.src = "img/complete.svg"
+        tmp.style.width = "100px"
+        tmp.style.marginleft = 'auto'
+        tmp.style.marginright = "auto"
+        tmp.position="relative"
+        beegdiv.appendChild(tmp)
+
+        for (let i in [this.name, this.age, health]){
+            tmp = document.createElement('p')
+            tmp.textContent = [this.name, this.age, health][i]
+            beegdiv.appendChild(tmp)
+        }
+
+        beegdiv.addEventListener('mousedown', (e)=>{
+            if (this.exhausted) {
+                $('.messages').append('<p>' + this.name + " is exhausted...</p>")
+                return
+            }
+            trobble_do(this, game)
+        })
     }
 }
-
-/*
-function multi_play(){
-    let name1 = get_name()
-    let sex1 = get_sex()
-    let trobble1 = Trobble(name1, sex1)
-    let name2 = get_name()
-    let ls = ['male','female']
-    ls.remove(sex1)
-    sex2 = ls[0]
-    trobble2 = Trobble(name2, sex2)
-    pets = [trobble1,trobble2]
-    while pets{ 
-        document.write('You have {} Trobbles named{ '.format(len(pets)))
-        for i in pets{
-            document.write(i.name + ' whose number is{ ' + str(pets.index(i)))
-        document.write(pets)
-        n = int(window.prompt('choose which tobble you want to take. Give its number{ '))
-        trobble = pets[n]
-        actions = {'feed'{ trobble.feed, 'cure'{ trobble.cure, 'mate'{''}
-        action = get_action(actions,pets,n) 
-        test = action()
-        if test != None{
-            pets.append(test)
-        for i in pets{
-            i.next_turn()
-        dead = []
-        for i in pets{
-            if ! (i.is_alive){
-                dead.append(i)
-                pets.remove(i)
-        if dead{
-            document.write('Unfortunately your Trobbles ' + str(dead) + ' died. ')
-    document.write('You killed every trobble')
-*/

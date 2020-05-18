@@ -41,19 +41,20 @@ class Game{
                     continue
                 }
 
-                const tmp = document.createElement("div")
-                tmp.innerHTML = trobble.display()
-                tmp.classList.add('desc')
-                tmp.addEventListener('mousedown', (e)=>{
-                    if (trobble.exhausted) {
-                        $('.messages').append('<p>' + trobble.name + " is exhausted...</p>")
-                        return
-                    }
-                    trobble_do(trobble, this)
-                })
+                //const tmp = document.createElement("div")
+                //tmp.innerHTML = trobble.display()
+                //tmp.classList.add('desc')
+                // tmp.addEventListener('mousedown', (e)=>{
+                //     if (trobble.exhausted) {
+                //         $('.messages').append('<p>' + trobble.name + " is exhausted...</p>")
+                //         return
+                //     }
+                //     trobble_do(trobble, this)
+                // })
+                trobble.display(this)
                 live_trobbles.push(trobble)
 
-                lot.appendChild(tmp)
+                //lot.appendChild(tmp)
             }
             this.trobbles = live_trobbles
             if (this.trobbles.length === 0)
@@ -72,6 +73,29 @@ class Game{
             this.trobbles[i].next_turn()
         }
         $('.messages').append('<p>A day has passed</p>')
-        console.log('f')
+        turncount++
+    }
+}
+
+class Story{
+    events = {
+        0: this.game_init,
+        2: this.second_trobble_arrival
+    }
+
+    event_happen(counter){
+        if (counter in this.events){
+            this.events[counter]()
+        }
+
+    }
+
+    game_init(){
+        $("#messages").append("<p>To start you off, here is your first Trobble</p>")
+        g.new_trobble()
+    }
+
+    second_trobble_arrival(){
+        g.new_trobble()
     }
 }

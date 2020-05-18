@@ -44,7 +44,7 @@ function generate(game, name, popup){
     popup.show()
 }
 
-function create_new_trobble(game, popup){
+function create_new_trobble(game, popup, baby=false, parents=null){
     popup.clear_content()
 
     let div = document.createElement('div')
@@ -72,8 +72,15 @@ function create_new_trobble(game, popup){
     tmp.addEventListener("mousedown", ()=>{
         popup.clear_content()
         popup.hide()
+        if (!baby)
+            generate(game, name.value, popup)
+        else{
+            let baby = new Trobble(name.value, parents[0].sex)
+            baby.baby = true
+            game.append_trobble(baby)
 
-        generate(game, name.value, popup)
+            $('.messages').append(`<p>${parents[0].name} and ${parents[1].name} mated.</p>`)
+        }
     })
 }
 
@@ -127,12 +134,13 @@ function mate(trobble, game){
             trobble.exhausted = true
             partner.exhausted = true
 
-            let name = window.prompt("How shall the baby be called?")
-            let baby = new Trobble(name, trobble.sex)
-            baby.baby = true
-            game.append_trobble(baby)
-
-            $('.messages').append(`<p>${trobble.name} and ${partner.name} mated.</p>`)
+            create_new_trobble(game, popup, true, [trobble,partner])
+            // let name = window.prompt("How shall the baby be called?")
+            // let baby = new Trobble(name, trobble.sex)
+            // baby.baby = true
+            // game.append_trobble(baby)
+            //
+            // $('.messages').append(`<p>${trobble.name} and ${partner.name} mated.</p>`)
         })
         div.appendChild(tmp)
     }
