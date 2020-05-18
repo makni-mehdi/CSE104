@@ -1,3 +1,4 @@
+"use strict";
 // interactions with user
 class Popup{
     content = ""

@@ -1,3 +1,4 @@
+"use strict";
 let observer = new MutationObserver(scrollToBottom);
 let lot = document.querySelector('.list_of_trobbles')
 let msg = document.querySelector('.messages')
@@ -32,7 +33,6 @@ window.onload = ()=>{
 
 function play(){
     if (last != turncount) {
-        console.log(turncount)
         story.event_happen(turncount)
     }
     last = turncount

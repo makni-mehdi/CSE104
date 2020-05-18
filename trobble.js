@@ -1,3 +1,4 @@
+"use strict";
 class Trobble{
     exhausted = false;
     baby = false;
